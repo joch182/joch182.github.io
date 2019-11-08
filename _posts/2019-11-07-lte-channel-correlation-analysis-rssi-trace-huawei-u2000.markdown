@@ -24,7 +24,7 @@ As you may noticed, the best way to find this kind of issues is by visiting ever
 
 1. In the Huawei U2000 OSS system, perform an RSSI trace on the required cells for about 1-2 hours.
 2. Download the trace results on csv format
-3. Download the tool for channel correlation analysis on my [github repo](https://github.com/joch182/LTE-RSSI-Analysis-Tool): 
+3. Download the tool for channel correlation analysis on my [github repo](https://github.com/joch182/LTE-RSSI-Analysis-Tool)
 4. Execute the task and get the results for each cell, the higher correlation between ports means that those ports are probably using the same polarization port
 
 ## About the tool
