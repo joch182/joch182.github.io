@@ -29,7 +29,7 @@ As you may noticed, the best way to find this kind of issues is by visiting ever
 
 ## About the tool
 
-Basically the tool gets the correlation value between each pair of ports on the antenna array.
+Basically, the tool gets the correlation value between each pair of ports on the antenna array so you as RF engineer can analyze it.
 
 {% highlight python %}
     for i in range(len(files)):
