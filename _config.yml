@@ -11,7 +11,7 @@ site-twitter: #if your site has a twitter account, enter it here
 # Author Settings
 author: Jose # add your name
 author-img: joch.JPG # add your photo
-about-author: Software development wannabe with data analysis background. Trying to keep up in the learning cicle # add description
+about-author: Python | SQL | Data Analysis    Telecom | RF | LTE # add description
 social-twitter: joc182 # add your Twitter handle
 social-facebook: # add your Facebook handle
 social-github: joch182 # add your Github handle
@@ -22,7 +22,7 @@ social-email: hello@joseh.me # add your Email address
 discus-identifier: mr-brown # add your discus identifier
 
 # Tracker
-analytics: # Google Analytics
+analytics: UA-151897709-1 # Google Analytics
 
 # Build Settings
 markdown: kramdown
