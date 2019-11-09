@@ -11,7 +11,7 @@ site-twitter: #if your site has a twitter account, enter it here
 # Author Settings
 author: Jose # add your name
 author-img: joch.JPG # add your photo
-about-author: Python | SQL | Data Analysis    Telecom | RF | LTE # add description
+about-author: Python | SQL | Data Analysis    Telecom | RF | LTE | UMTS # add description
 social-twitter: joc182 # add your Twitter handle
 social-facebook: # add your Facebook handle
 social-github: joch182 # add your Github handle
