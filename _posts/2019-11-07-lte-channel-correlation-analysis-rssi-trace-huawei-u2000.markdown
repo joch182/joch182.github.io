@@ -1,6 +1,6 @@
 ---
 layout: post
-title: LTE channel correlation analysis based on RSSI trace from Huawei U2000 equipment
+title: LTE channel correlation analysis python tool based on RSSI trace from Huawei U2000 equipment
 date: 2019-11-07 23:00:00 -0500
 description: Sharing development of basic python tool for LTE channel correlation analysis # Add post description (optional)
 img: posts_imgs/Cell-Signal-Strength-Chart.jpg # Add image post (optional)
