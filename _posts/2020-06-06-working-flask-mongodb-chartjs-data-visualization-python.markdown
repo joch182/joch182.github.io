@@ -13,7 +13,7 @@ In this post i want to share some major tips to visualize data using python and 
 
 Flask is very easy, light and small python framework to build web servers. I enjoy using it a lot because of its flexibility. To start using it (asuming you have already installed the package) you only need following code snippet:
 
-{% highlight python %}
+```python
     from flask import Flask, render_template, url_for
 
     app = Flask(__name__)
@@ -24,7 +24,7 @@ Flask is very easy, light and small python framework to build web servers. I enj
 
     if __name__ == "__main__":
         app.run(host='0.0.0.0',debug=True)
-{% endhighlight %}
+```
 
 Voilà, now you already have a web server running on your 127.0.0.1:5000
 
