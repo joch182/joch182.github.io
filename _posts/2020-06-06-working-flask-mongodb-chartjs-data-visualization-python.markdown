@@ -123,7 +123,7 @@ Previous code loads the 'dashboard.html' file and send a the data in a variable 
 
 In the HTML file we have following code to generate the chart:
 
-```
+```python
     <!-- Chart.js is loaded here -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
