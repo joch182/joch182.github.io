@@ -34,7 +34,7 @@ In my case, my data is saved in a MongoDB database in an AWS EC2 linux instance 
 
 To create the connection we need to fill following data:
 
-{% highlight python %}
+```python
 def connectSSH():
     server = SSHTunnelForwarder(
     (os.getenv("MONGO_HOST"), 5552),
@@ -44,7 +44,7 @@ def connectSSH():
     local_bind_address=(os.getenv("MONGO_LOCALHOST"), 27017),
     )
     return connectionSSH
-{% endhighlight %}
+```
 
 MONGO_HOST is the ip address of the EC2 instance
 MONGO_SSH_USER is the user of the EC2 instance, depending on the type of AMI used it could be: ec2-user, ubuntu, root, admin etc.
@@ -53,21 +53,21 @@ MONGO_LOCALHOST is the address where the MongoDB is installed, if you follow nor
 
 The previous code returns *connectionSSH* which shoould be started like this (assuming it is saved in a variable called server):
 
-{% highlight python %}
+```python
     server.start()
-{% endhighlight %}
+```
 
 Once you finish your work on the instance, you should manually close the connection to avoid problems (the library usually fails when we kept the connection open):
 
-{% highlight python %}
+```python
     server.stop()
-{% endhighlight %}
+```
 
 So now you have tested the SSH connection we can connect to the Mongo database.
 
-{% highlight python %}
+```python
     client = MongoClient(os.getenv("MONGO_LOCALHOST"), 27017)
-{% endhighlight %}
+```
 
 At this point you can perform any query on the Mongo database with the variable client.
 
@@ -77,21 +77,21 @@ To perform queries on MongoDB with python we use the library *PyMongo* which is 
 
 To start performing query we need to define the DB where the query will be executed. In the following example we select 'company' as the DB
 
-{% highlight python %}
+```python
     db = client['company']
-{% endhighlight %}
+```
 
 On the *db* variable we can perform the MongoDB queries, let's do with some examples:
 
-{% highlight python %}
+```python
     usersData = db.users.find({"type": 0}, {'_id': 1, 'email': 1, 'created_at': 1})
-{% endhighlight %}
+```
 
 Previous query is executed in the collection *users*, the first '{}' is used to add some filters, in this case we are querying all the users where the field *type* is 0. The second '{}' is to define what fields to get from the query, sometimes the collection has too many fields and we only need few, so we use this second array to define which fields to obtain. 
 
 The result are saved as *cursor* object in usersData, that means that you need to iterate over the cursor with a loop similar to this:
 
-{% highlight python %}
+```python
     total_users = 0
     recent24h_users = 0
     recentWeek_users = 0
@@ -107,7 +107,7 @@ The result are saved as *cursor* object in usersData, that means that you need t
             'recent24hUsers': recent24h_users,
             'recentWeekusers': recentWeek_users
     }
-{% endhighlight %}
+```
 
 So in previous code snipet we are counting the total of users registered in the collection, the total users registered in the past 24 hours and 7 days and storing the data in a dict object.
 
@@ -115,9 +115,9 @@ So in previous code snipet we are counting the total of users registered in the 
 
 Now that we have our data collected from MongoDB we need to pass it to our view to chart. For this case we use a method provided by flask called *render_template*
 
-{% highlight python %}
+```python
     return render_template('dashboard.html', KPIUsers=getKPIUsers)
-{% endhighlight %}
+```
 
 Previous code loads the 'dashboard.html' file and send a the data in a variable called KPIUsers.
 
