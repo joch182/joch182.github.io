@@ -115,9 +115,7 @@ So in previous code snipet we are counting the total of users registered in the 
 
 Now that we have our data collected from MongoDB we need to pass it to our view to chart. For this case we use a method provided by flask called *render_template*
 
-```python
-    return render_template('dashboard.html', KPIUsers=getKPIUsers)
-```
+
 
 Previous code loads the 'dashboard.html' file and send a the data in a variable called KPIUsers.
 
