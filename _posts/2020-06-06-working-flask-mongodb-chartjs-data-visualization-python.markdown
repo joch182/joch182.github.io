@@ -123,7 +123,7 @@ Previous code loads the 'dashboard.html' file and send a the data in a variable 
 
 In the HTML file we have following code to generate the chart:
 
-```python
+```html
     <!-- Chart.js is loaded here -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
@@ -137,7 +137,7 @@ In the HTML file we have following code to generate the chart:
                 labels: ['Total', 'Recent 24H', 'Recent Week'],
                 datasets: [{
                     label: 'Registro de usuarios',
-                    data: [{{KPIUsers['totalUsers']}}, {{KPIUsers['recent24hUsers']}}, {{KPIUsers['recentWeekusers']}}],
+                    data: [\{\{KPIUsers['totalUsers']}}, \{\{KPIUsers['recent24hUsers']}}, \{\{KPIUsers['recentWeekusers']}}],
                     backgroundColor: 'rgba(63, 191, 127, 0.2)',
                     borderColor: 'rgba(63, 191, 127, 1)',
                     borderWidth: 1
