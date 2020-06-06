@@ -123,7 +123,30 @@ Previous code loads the 'dashboard.html' file and send a the data in a variable 
 
 In the HTML file we have following code to generate the chart:
 
-
+```html
+    <!-- Chart.js is loaded here -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <div>
+        <canvas id="users" width="150" height="50"></canvas>
+        <script>
+        var ctxUsers = document.getElementById('users').getContext('2d');
+        var users = new Chart(ctxUsers, {
+            type: 'bar',
+            data: {
+                labels: ['Total', 'Recent 24H', 'Recent Week'],
+                datasets: [{
+                    label: 'Registro de usuarios',
+                    data: [{{KPIUsers['totalUsers']}}, {{KPIUsers['recent24hUsers']}}, {{KPIUsers['recentWeekusers']}}],
+                    backgroundColor: 'rgba(63, 191, 127, 0.2)',
+                    borderColor: 'rgba(63, 191, 127, 1)',
+                    borderWidth: 1
+                }]
+            }
+        });
+        </script>
+    </div>
+```
 Notice that the arrangement of the labels and data must be equal to match each KPI with corresponding label. You have tons of options to customize your chart and the [documentation](https://www.chartjs.org/docs/latest/) is very easy to understand.
 
 Hope this post is useful for you, if you have any suggestion/comment/question drop a comment below.
