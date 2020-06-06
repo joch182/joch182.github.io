@@ -119,7 +119,7 @@ Now that we have our data collected from MongoDB we need to pass it to our view 
     return render_template('dashboard.html', KPIUsers=getKPIUsers)
 ```
 
-Previous code loads the 'dashboard.html' file and send a the data in a variable called KPIUsers.
+Previous code loads the 'dashboard.html' file and send a the data in a variable called *KPIUsers.
 
 In the HTML file we have following code to generate the chart:
 
@@ -137,7 +137,7 @@ In the HTML file we have following code to generate the chart:
                 labels: ['Total', 'Recent 24H', 'Recent Week'],
                 datasets: [{
                     label: 'Registro de usuarios',
-                    data: [{{KPIUsers['totalUsers']}}, {{KPIUsers['recent24hUsers']}}, {{KPIUsers['recentWeekusers']}}],
+                    data: [{{KPIUsers['totalUsers']|safe}}, {{KPIUsers['recent24hUsers']|safe}}, {{KPIUsers['recentWeekusers']|safe}}],
                     backgroundColor: 'rgba(63, 191, 127, 0.2)',
                     borderColor: 'rgba(63, 191, 127, 1)',
                     borderWidth: 1
