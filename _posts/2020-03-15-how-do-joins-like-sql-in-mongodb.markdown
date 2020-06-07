@@ -3,7 +3,7 @@ layout: post
 title: How to perform joins in MongoDB
 date: 2020-03-15 13:00:00 -0500
 description: Learn some tips on how to perform SQL-Joins in Mongodb
-img: posts_imgs/mongodb_joins.jpg
+img: posts_imgs/mongodb_joins.png
 tags: [python, mongodb]
 ---
 
