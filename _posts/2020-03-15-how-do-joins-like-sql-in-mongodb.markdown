@@ -125,7 +125,7 @@ We obtain following results:
 
 #### $project function
 
-This operator is very common in MongoDB environment. It basically offers  an option to decide what fields to show in the output. if the collections are too big (a lot of fields) and we need only some specific fields, we can use this operator to decide which field to bring. By default the *_id* is always included in the query, in this case we set to 0 to not include it. In addition we require: 'business_name', 'address', 'created_at' which are located in the left collection (*business*), also we include the columns: 'email', 'Name', 'LastName' which are taken from the foreign collection (*users* pointed as user_data)
+This operator is very common in MongoDB environment. It basically offers  an option to decide what fields to show in the output. if the collections are too big (a lot of fields) and we need only some specific fields, we can use this operator to decide which field to bring. By default the *_id* is always included in the query, in this case we set to 0 to not include it. In addition we require: 'business_name', 'address', 'created_at' which are located in the left collection (*business*), also we create the columns: 'email', 'Name', 'LastName' to show the data taken from the foreign collection (*users* pointed as user_data).
 
 #### $sort function
 
