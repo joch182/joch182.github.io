@@ -4,7 +4,7 @@ title: Working with Flask, MongoDB and CharJS for nice data visualization with p
 date: 2020-02-20 12:00:00 -0500
 description: Sharing some tips to visualize data in python
 img: posts_imgs/flask_mongo.jpg 
-tags: [python, mongodb, data visualization, flask]
+tags: [python, mongodb, data visualization, flask, chart]
 ---
 
 In this post i want to share some major tips to visualize data using python and mongodb. For the visualization part we use ChartJS although any other library available might be also suitable. For this post we will use an existing dataset so the main focus will be: Inititalize your flask app, database connection, data query, passing the data to template engine and use the data to generate charts.
