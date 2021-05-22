@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Propagation delay analysis tool for 3G/4G with Python in Huawei Equipment
+title: Propagation delay analysis tool for 3G with Python in Huawei Equipment
 date: 2020-07-25 13:00:00 -0500
 description: This post shows how use python to create a propagation delay analysis tool to help RF engineers locating cells with high overshooting problems
 img: posts_imgs/3G_TP_plot_ge.jpg
@@ -46,8 +46,6 @@ The file should start like this:
 ```
 
 As you can see the parent element is called 'kml' and not 'xml'. For more details about how to structure the data for Google Earth purposes, cleck [here](https://developers.google.com/kml/documentation/kml_tut "KML Tutorial")
-
-Since the principle is very similar to get the propagation delay analysis in both 3G and 4G, there are some minor changes to perform (mostly due to the LTE counters for propagation delay), so as you may realize both tools are very similar between each other.
 
 ## Use/Share/Fork/Improve it
 
