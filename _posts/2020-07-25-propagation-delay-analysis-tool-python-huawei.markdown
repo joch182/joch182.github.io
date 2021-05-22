@@ -51,12 +51,10 @@ Since the principle is very similar to get the propagation delay analysis in bot
 
 ## Use/Share/Fork/Improve it
 
-Next, you can find the 2 repos from GitHub whe you can download the tool for both 3G and 4G scenarios and start using on your daily activities. I just expect you can share, improve it as much as possible. If you find any bug please let me know or just open a pull request.
+Next, you can find the repo from GitHub whe you can download the tool for 3G scenario and start using on your daily activities. I just expect you can share, improve it as much as possible. If you find any bug please let me know or just open a pull request.
 
 ## [3G tool](https://github.com/joch182/3G-Huawei-Propagation-Delay-Tool-Google-Earth)
 
-## [4G tool]()
-
 ## NOTICE
 
-Tools are created to be used only with Huawei counters,it should be possible to modify the source code to use it with other vendor data, nevertheless if you are trying to use it as it is please follow the instructions, specially when importing the data and EPT tables, those files must follow the exact format shown in the template
+Tool is created to be used only with Huawei counters,it should be possible to modify the source code to use it with other vendor data, nevertheless if you are trying to use it as it is please follow the instructions, specially when importing the data and EPT tables, those files must follow the exact format shown in the template
