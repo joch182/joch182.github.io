@@ -4,7 +4,7 @@ title: Propagation delay analysis tool for 3G with Python in Huawei Equipment
 date: 2020-07-25 13:00:00 -0500
 description: This post shows how use python to create a propagation delay analysis tool to help RF engineers locating cells with high overshooting problems
 img: posts_imgs/3G_TP_plot_ge.jpg
-tags: [python, Google Earth, Huawei, RF, LTE, 3G]
+tags: [python, Google Earth, Huawei, RF, 3G]
 ---
 
 Recently i have found an excel macro tool to generate propagation delay plots for each 3G cell. It was very interesting and also helpful for us, RF engineers who are constantly optimizing RF coverage. Unfortunetely the macro was protected by password so it was not possile to apply the same concep to create a 4G tool. Also the fact that it was made with excel was kind of dissapointing (i am not very fan of excel macros) so i decided to first replicate the same principle with Python and then apply it to create the LTE tool. 
