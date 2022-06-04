@@ -8,7 +8,7 @@ tags: [python, webscraping, selenium, beautifulsoup]
 ---
 
 For this post, we will not focused on any specific web site to perform scraping, what we will do is to analyzed the main instructions required to start doing web scraping in any site. 
-First of all, let me share some important links you need to check to perform web scraping.
+First of all, let me share some important links that you can check to master your skills in web scraping.
 
 - Documentation for [BeautifulSoup](https://beautiful-soup-4.readthedocs.io/en/latest/)
 - Documentation for [Selenium](https://selenium-python.readthedocs.io/)
@@ -27,9 +27,11 @@ In the documentation you can find that $lookup operator inside aggregation opera
 }
 ```
 
-Selenium is basically a library that allows to trigger a test mode web browser from the python code and from this script you can get all the data loaded in the web browser. For static websites, we only need the Requests library which allows to perfom HTTP requests from python code, since the website is static all the data is loaded with the HTTP request procedure. However, for dynamic sites (websites that uses javascript to load the data) this is not enough (and most of the web is made with dinamic data), for this cases we need some other libraries in order to obtain the data loaded by javascript, one of those tools is Selenium.
+Selenium is basically a library that allows us to trigger a test mode web browser from the python code and from this script you can get all the data loaded in the web browser. For static websites, we only need the Requests library which allows to perfom HTTP requests from python code, since the website is static all the data is loaded with the HTTP request procedure. However, for dynamic sites (websites that uses javascript to load the data) this is not enough (and most of the web is made with dinamic data), for this cases we need some other libraries in order to obtain the data loaded by javascript, one of those tools is Selenium.
 
 Selenium library basically allows to triger a web browser in order to get all the dynamic data and then we can get the HTML to perform the scrape. If we only use Requests library for dynamic sites, then the data retrieve by Javascript will be missing since the HTTP request doesnt trigger the javascript function that populates the data, javascript is triger by the web browser.
+
+![selenium](/assets/img/posts_imgs/get-started-pyhton-webscrapping/selenium.png)
 
 In order to have selenium working properly it is required to install web browser drivers (Chrome, Firefox or Edge). With following package, we can manage the web drivers easier:
 
