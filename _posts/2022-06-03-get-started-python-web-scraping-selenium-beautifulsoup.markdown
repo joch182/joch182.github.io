@@ -3,7 +3,7 @@ layout: post
 title: Get started with web scraping in python using selenium and beautifulsoup
 date: 2022-06-02 21:00:00 -0500
 description: Learn how to perform some basic web scraping with python using libraries selenium and beautifulsoup
-img: posts_imgs/get-started-pyhton-webscraping/what-is-webscraping.png
+img: posts_imgs/get-started-pyhton-webscrapping/what-is-webscraping.png
 tags: [python, webscraping, selenium, beautifulsoup]
 ---
 
