@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Working with Flask, MongoDB and CharJS for nice data visualization with python
+title: Working with Flask, MongoDB and Chart.JS for nice data visualization with python
 date: 2020-02-20 12:00:00 -0500
 description: Sharing some tips to visualize data in python
 img: posts_imgs/flask_mongo.jpg 
