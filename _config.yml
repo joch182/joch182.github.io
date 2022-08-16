@@ -7,7 +7,7 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 site-twitter: #if your site has a twitter account, enter it here
 
 # Author Settings
-author: Jose # add your name
+author: Jose Heredia # add your name
 author-img: joch2.JPG # add your photo
 about-author: Python | Data Science | ML | DL | SQL | NoSQL | BI | Telecom | 5G-NR | LTE | UMTS | IoT  # add description
 social-twitter: joc182 # add your Twitter handle
