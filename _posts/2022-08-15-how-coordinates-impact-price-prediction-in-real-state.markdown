@@ -26,8 +26,7 @@ Analyzing results for different regression algorithms during house price predict
 
 For data exploratory analysis we choose Rapidminer Studio. Let's perform some basic EDA for the most important characteristics of the data to be used.
 
-The current dataset belongs to properties from Colombia. So common price is above 200,000,000.
-As we can see in next plot, most of the samples are contained between 3500M and 1000M
+The current dataset belongs to properties from Colombia. As we can see in next plot, most of the samples are contained between 350M and 1000M
 ![Price_property](/assets/img/posts_imgs/how-coordinates-impact-house-price-prediction/price-colombia-boxplot.png)
 
 Number of rooms is contained between 1 and 5.
