@@ -48,10 +48,10 @@ Another important feature is area of the property. This plot shows a lot of outl
 
 Based on previous basic analysis, we have defined following filters in order to get a model more accurate.
 
-- Stratum equals to 4. Other stratum requires to consider more features to get more accuraty on the model. After the filter is applied, this column is useless so it will be dropped.
+- Stratum equals to 4. Other stratum requires to consider more features to get more accuracy on the model. After the filter is applied, this column is useless so it will be dropped.
 - Price below 600M. For Stratum 4, 600M is a good thresholds to discard outliers.
-- Total area in square meters is maximum 180. Same a price, for stratum 4, 180 square meters is a good threshold to discard outliers.
-- For the price we applied a range reduction in order to change from Millions to thousands by dividing all rows by 1M.
+- Total area in square meters is maximum 180. Same as price, for stratum 4, 180 square meters is a good threshold to discard outliers.
+- For the price we applied a range reduction in order to change from millions to thousands by dividing all rows by 1M.
 
 Since we are using pandas to load the data in tabular form, we use dataframe functions to filter the data.
 
@@ -87,7 +87,7 @@ In order to get how much improvement is reached by using coordinates, we have de
 
 ## Model Training
 
-In order to apply different hiperparameters for all the regression (since we are predicting a price, the model training must be a regression)functions selected, we have prepared different functions for each model with several parameters.
+In order to apply different hiperparameters for all the regressions (since we are predicting a price, the model training must be a regression) functions selected, we have prepared different functions for each model with several parameters.
 
 The best parameters for each model will be selected and the results along with the configuration will be appended to a dataframe to compare the results.
 
@@ -110,19 +110,18 @@ The best parameters for each model will be selected and the results along with t
 
 ## Model Evaluation
 
-During training model, we split the data with 80% used for training and 20% for testing.
+During training model, we splitted the data with 80% used for training and 20% for testing.
 RMSE is used to compare the accurateness of the models. Basically we get the RMSE between the price predicted and real price from the testing dataset.
 
 Best results are obtained for XGBoost, Random Forest Regressor, Gradient Boost, Decission Tree Regressor etc. In the case of data from filter 1 (Without coordinates) the best RMSE is 51.8M
 ![Price_property](/assets/img/posts_imgs/how-coordinates-impact-house-price-prediction/results-without-coordinates.png)
 
-For filter 2 (including coordinates in the dataset), the improvement is high with reduction of 12M in RMSE. XGBoost and Random Forest continues to be the best model.
-Best RMSE is 39.7M
+For filter 2 (including coordinates in the dataset), the improvement is high, with a reduction of 12M in RMSE. XGBoost and Random Forest continues to be the best model reaching a RMSE of 39.7M
 ![Price_property](/assets/img/posts_imgs/how-coordinates-impact-house-price-prediction/results-with-coordinates.png)
 
 ## Final Thoughts
 
-As we can see, the coordinates can be a very mportant feature (as supposed, since it is well know that real state is about location, location, location) to consider in house prediction.
+As we can see, the coordinates can be a very important feature (as it was supposed, since it is well know that real state is all about location, location, location) to consider in house prediction.
 
 In additional testing, we have found some additional insights that we can consider in order to improve the accuracy of house pricing models.
 
