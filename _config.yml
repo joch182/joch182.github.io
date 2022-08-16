@@ -8,7 +8,7 @@ site-twitter: #if your site has a twitter account, enter it here
 
 # Author Settings
 author: Jose Heredia # add your name
-author-img: joch2.JPG # add your photo
+author-img: joch2.jpg # add your photo
 about-author: Python | Data Science | ML | DL | SQL | NoSQL | BI | Telecom | 5G-NR | LTE | UMTS | IoT  # add description
 social-twitter: joc182 # add your Twitter handle
 social-facebook: # add your Facebook handle
