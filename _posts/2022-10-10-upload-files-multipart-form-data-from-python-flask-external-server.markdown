@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Upload files as multipart/form-data from python flask server to third party API using requests
-date: 2022-10-10 18:00:00 -0500
+date: 2022-10-10 11:00:00 -0500
 description: Understand how to upload files as multipart/form-data from flask sever to external API using requests module
 img: posts_imgs/requests-toolbelt-multipart-formdata/python_requests_toolbelt.jpeg
 tags: [python, flask, requests,  API, server, backend, form-data, MultipartEncoder]
