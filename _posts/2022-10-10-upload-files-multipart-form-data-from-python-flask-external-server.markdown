@@ -18,25 +18,25 @@ Facturapi documentation to upload the files can be found [here](https://docs.fac
 In the frontend side, the form to upload the files and fill the password is shown below:
 
 ```html
-    <div class="form-row">
-        <div class="custom-file col-md-4">
-            <input class="custom-file-input" id="cerFile" name="cerFile" required="" type="file">
-            <label class="custom-file-label" for="cerFile" data-browse="Elegir">Archivo .cer</label>
-        </div>
-        <div class="custom-file col-md-4">
-            <input class="custom-file-input" id="keyFile" name="keyFile" required="" type="file">
-            <label class="custom-file-label" for="keyFile" data-browse="Elegir">Archivo .key</label>
-        </div>
-        <div class="form-group col-md-4">
-            <input class="form-control" id="cerPwd" name="cerPwd" placeholder="Contraseña del certificado" required="" type="password" value="">
-        </div>
+<div class="form-row">
+    <div class="custom-file col-md-4">
+        <input class="custom-file-input" id="cerFile" name="cerFile" required="" type="file">
+        <label class="custom-file-label" for="cerFile" data-browse="Elegir">Archivo .cer</label>
     </div>
+    <div class="custom-file col-md-4">
+        <input class="custom-file-input" id="keyFile" name="keyFile" required="" type="file">
+        <label class="custom-file-label" for="keyFile" data-browse="Elegir">Archivo .key</label>
+    </div>
+    <div class="form-group col-md-4">
+        <input class="form-control" id="cerPwd" name="cerPwd" placeholder="Contraseña del certificado" required="" type="password" value="">
+    </div>
+</div>
 ```
 
 It is very important that the FORM tag include the type of data to be sent through the post request as multipart/form-data.
 
 ```html
-    <form method="POST" action="/path-to-process-post-method" enctype="multipart/form-data">
+<form method="POST" action="/path-to-process-post-method" enctype="multipart/form-data">
 ```
 
 Set enctype in the form tag as "multipart/form-data" is required because this is how facturapi needs to receive the data we sent. This form points to our server hence we need to process this request and perform another request with the same information (suggest to validate everyhing before process) from our server to facturapi.
@@ -55,28 +55,28 @@ But first we need to install some dependencies required to perform requests from
 Backend code to upload the files and password is inside below function.
 
 ```python
-    import requests
-    from requests_toolbelt.multipart.encoder import MultipartEncoder
+import requests
+from requests_toolbelt.multipart.encoder import MultipartEncoder
 
-    def upload_csd(organizationId, cerFile, keyFile, cerPwd):
-        '''
-            Upload CSD of the organization to facturapi
-        '''
-        facturapi_user_key = app.config['MX_FACTURAPI_USER_KEY']
-        url = 'https://www.facturapi.io/v2/organizations/'+organizationId+'/certificate'
-        payload = MultipartEncoder(
-                    fields={
-                        'password':cerPwd,
-                        'cer': (cerFile.filename, cerFile.read(), 'application/octet-stream'),
-                        'key': (keyFile.filename, keyFile.read(), 'application/octet-stream')
-                    }
-                )
-        headers = {
-            'Content-Type': payload.content_type,
-            'Authorization': str('Bearer ' + facturapi_user_key)
-        }
-        response = requests.request("PUT", url, headers=headers, data=payload)
-        return response
+def upload_csd(organizationId, cerFile, keyFile, cerPwd):
+    '''
+        Upload CSD of the organization to facturapi
+    '''
+    facturapi_user_key = app.config['MX_FACTURAPI_USER_KEY']
+    url = 'https://www.facturapi.io/v2/organizations/'+organizationId+'/certificate'
+    payload = MultipartEncoder(
+                fields={
+                    'password':cerPwd,
+                    'cer': (cerFile.filename, cerFile.read(), 'application/octet-stream'),
+                    'key': (keyFile.filename, keyFile.read(), 'application/octet-stream')
+                }
+            )
+    headers = {
+        'Content-Type': payload.content_type,
+        'Authorization': str('Bearer ' + facturapi_user_key)
+    }
+    response = requests.request("PUT", url, headers=headers, data=payload)
+    return response
 ```
 
 Now, lets review the code use to send data to facturapi.
@@ -88,7 +88,7 @@ Libraries imported are required to perfom requests from python. The "Requests" m
 The important part here is the "Requests_toolbelt" module.
 
 ```python
-    from requests_toolbelt.multipart.encoder import MultipartEncoder
+from requests_toolbelt.multipart.encoder import MultipartEncoder
 ```
 
 This is very important to consider when sending "multipart/form-data" because "Requests" library alone doesn't handle pretty well this type of form-data, and specially for this case, uploading the files and password will not work unless we use this library along with Requests.
@@ -109,7 +109,7 @@ According to the facturapi documentation, there are several parameters we need t
     In this request, the facturapi user key is sent on the headers using following key/value pair.
 
     ```python
-        'Authorization': str('Bearer ' + facturapi_user_key)
+    'Authorization': str('Bearer ' + facturapi_user_key)
     ```
 
 ### Generate payload data to include in the request
@@ -117,13 +117,13 @@ According to the facturapi documentation, there are several parameters we need t
 The payload to be sent in the request can be found in the following code:
 
 ```python
-    payload = MultipartEncoder(
-                    fields={
-                        'password':cerPwd,
-                        'cer': (cerFile.filename, cerFile.read(), 'application/octet-stream'),
-                        'key': (keyFile.filename, keyFile.read(), 'application/octet-stream')
-                    }
-                )
+payload = MultipartEncoder(
+    fields={
+        'password':cerPwd,
+        'cer': (cerFile.filename, cerFile.read(), 'application/octet-stream'),
+        'key': (keyFile.filename, keyFile.read(), 'application/octet-stream')
+    }
+)
 ```
 
 The data to be sent are:
@@ -143,10 +143,10 @@ The reason why we need to consider this function to generate the payload to be s
 After generating the payload with the MultipartEncoder function, we can set the 'Content-Type' in the header which will inlcude the boundary.
 
 ```python
-    headers = {
-            'Content-Type': payload.content_type,
-            'Authorization': str('Bearer ' + facturapi_user_key)
-        }
+headers = {
+    'Content-Type': payload.content_type,
+    'Authorization': str('Bearer ' + facturapi_user_key)
+}
 ```
 
 The Requests module [shows](https://requests.readthedocs.io/en/latest/user/quickstart/#post-a-multipart-encoded-file) in its documentation that for Multipart data it might be necessary to use the toolbelt which is an additional module not included in Requests library.
