@@ -17,7 +17,7 @@ Analyzing results for different regression algorithms during house price predict
     - Stratum (Value from 1 to 6 which provides socio-deographics information of the area)
     - Type of property
     - Age of the property
-    - size of the property
+    - Size of the property
     - Geographic location of the property
     - Price of property (which is the target feature)
 
