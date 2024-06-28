@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Using and assuming different roles within Glue Job
+title: Assuming different roles within Glue Job to perform actions scoped within different roles
 date: 2024-06-28 10:00:00 -0500
 description: How to assume different roles within Glue Job to perform tasks that are not allowed by the Glue IAM Role assigned, but available thourhg a different role that can be assumed by the Glue IAM Role.
 img: posts_imgs/glue-assume-role/glue_assume_role.png

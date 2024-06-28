@@ -45,7 +45,7 @@ The file should start like this:
     ET.SubElement(document, 'name').text = '3G_TP_Analiysis.KMZ'
 ```
 
-As you can see the parent element is called 'kml' and not 'xml'. For more details about how to structure the data for Google Earth purposes, cleck [here](https://developers.google.com/kml/documentation/kml_tut "KML Tutorial")
+As you can see the parent element is called 'kml' and not 'xml'. For more details about how to structure the data for Google Earth purposes, click [here](https://developers.google.com/kml/documentation/kml_tut "KML Tutorial")
 
 ## Use/Share/Fork/Improve it
 
