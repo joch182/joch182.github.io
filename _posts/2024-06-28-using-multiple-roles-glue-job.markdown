@@ -4,7 +4,7 @@ title: Assuming different roles within Glue Job to perform actions scoped in dif
 date: 2024-06-28 10:00:00 -0500
 description: How to assume different roles within Glue Job to perform tasks that are not allowed by the Glue IAM Role assigned, but available thourhg a different role that can be assumed by the Glue IAM Role.
 img: posts_imgs/glue-assume-role/glue_assume_role.png
-tags: [python, AWS, Glue, IAM, job]
+tags: [python, AWS, glue, iam, job]
 ---
 
 Currently, AWS Glue jobs only supports a single IAM role. In some scenarios, you may want to assume another role with different scoped permissions than the Glue Job IAM Role. In these cases, one common workaround is to set the Glue IAM role as a trusted identity in the role with different scoped permissions and assume the role within the Glue Job script to perform the operations allowed only for the assumed role.
@@ -16,70 +16,76 @@ For this exercise we will create a Python Shell job and we will provide a Glue R
 
 ```json
 {
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": [
-        "glue:*",
-        "s3:GetBucketLocation",
-        "s3:ListBucket",
-        "s3:ListAllMyBuckets",
-        "s3:GetBucketAcl",
-        "ec2:DescribeVpcEndpoints",
-        "ec2:DescribeRouteTables",
-        "ec2:CreateNetworkInterface",
-        "ec2:DeleteNetworkInterface",
-        "ec2:DescribeNetworkInterfaces",
-        "ec2:DescribeSecurityGroups",
-        "ec2:DescribeSubnets",
-        "ec2:DescribeVpcAttribute",
-        "iam:ListRolePolicies",
-        "iam:GetRole",
-        "iam:GetRolePolicy",
-        "cloudwatch:PutMetricData"
-      ],
-      "Resource": ["*"]
-    },
-    {
-      "Effect": "Allow",
-      "Action": ["s3:CreateBucket"],
-      "Resource": ["arn:aws:s3:::aws-glue-*"]
-    },
-    {
-      "Effect": "Allow",
-      "Action": ["s3:GetObject", "s3:PutObject", "s3:DeleteObject"],
-      "Resource": ["arn:aws:s3:::aws-glue-*/*", "arn:aws:s3:::*/*aws-glue-*/*"]
-    },
-    {
-      "Effect": "Allow",
-      "Action": ["s3:GetObject"],
-      "Resource": ["arn:aws:s3:::crawler-public*", "arn:aws:s3:::aws-glue-*"]
-    },
-    {
-      "Effect": "Allow",
-      "Action": [
-        "logs:CreateLogGroup",
-        "logs:CreateLogStream",
-        "logs:PutLogEvents"
-      ],
-      "Resource": ["arn:aws:logs:*:*:*:/aws-glue/*"]
-    },
-    {
-      "Effect": "Allow",
-      "Action": ["ec2:CreateTags", "ec2:DeleteTags"],
-      "Condition": {
-        "ForAllValues:StringEquals": {
-          "aws:TagKeys": ["aws-glue-service-resource"]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "glue:*",
+                "s3:GetBucketLocation",
+                "s3:ListBucket",
+                "s3:ListAllMyBuckets",
+                "s3:GetBucketAcl",
+                "ec2:DescribeVpcEndpoints",
+                "ec2:DescribeRouteTables",
+                "ec2:CreateNetworkInterface",
+                "ec2:DeleteNetworkInterface",
+                "ec2:DescribeNetworkInterfaces",
+                "ec2:DescribeSecurityGroups",
+                "ec2:DescribeSubnets",
+                "ec2:DescribeVpcAttribute",
+                "iam:ListRolePolicies",
+                "iam:GetRole",
+                "iam:GetRolePolicy",
+                "cloudwatch:PutMetricData"
+            ],
+            "Resource": ["*"]
+        },
+        {
+            "Effect": "Allow",
+            "Action": ["s3:CreateBucket"],
+            "Resource": ["arn:aws:s3:::aws-glue-*"]
+        },
+        {
+            "Effect": "Allow",
+            "Action": ["s3:GetObject", "s3:PutObject", "s3:DeleteObject"],
+            "Resource": [
+                "arn:aws:s3:::aws-glue-*/*",
+                "arn:aws:s3:::*/*aws-glue-*/*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": ["s3:GetObject"],
+            "Resource": [
+                "arn:aws:s3:::crawler-public*",
+                "arn:aws:s3:::aws-glue-*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+            ],
+            "Resource": ["arn:aws:logs:*:*:*:/aws-glue/*"]
+        },
+        {
+            "Effect": "Allow",
+            "Action": ["ec2:CreateTags", "ec2:DeleteTags"],
+            "Condition": {
+                "ForAllValues:StringEquals": {
+                    "aws:TagKeys": ["aws-glue-service-resource"]
+                }
+            },
+            "Resource": [
+                "arn:aws:ec2:*:*:network-interface/*",
+                "arn:aws:ec2:*:*:security-group/*",
+                "arn:aws:ec2:*:*:instance/*"
+            ]
         }
-      },
-      "Resource": [
-        "arn:aws:ec2:*:*:network-interface/*",
-        "arn:aws:ec2:*:*:security-group/*",
-        "arn:aws:ec2:*:*:instance/*"
-      ]
-    }
-  ]
+    ]
 }
 ```
 
@@ -87,16 +93,16 @@ Since this role will used directly by the Glue job we need to set the "Trust Rel
 
 ```json
 {
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Principal": {
-        "Service": "glue.amazonaws.com"
-      },
-      "Action": "sts:AssumeRole"
-    }
-  ]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "glue.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+        }
+    ]
 }
 ```
 
@@ -108,17 +114,17 @@ Trust relationship policy:
 
 ```json
 {
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "Statement1",
-      "Effect": "Allow",
-      "Principal": {
-        "AWS": "arn:aws:iam::<ACCOUNT_ID_WEHERE_GLUE_JOB_RUNS>:role/glue-role-test"
-      },
-      "Action": "sts:AssumeRole"
-    }
-  ]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Statement1",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::<ACCOUNT_ID_WEHERE_GLUE_JOB_RUNS>:role/glue-role-test"
+            },
+            "Action": "sts:AssumeRole"
+        }
+    ]
 }
 ```
 

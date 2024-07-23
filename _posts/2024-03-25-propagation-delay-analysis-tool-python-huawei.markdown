@@ -1,21 +1,21 @@
 ---
 layout: post
 title: Propagation delay analysis tool for 3G with Python in Huawei Equipment
-date: 2020-07-25 13:00:00 -0500
+date: 2024-03-25 11:00:00 -0500
 description: This post shows how use python to create a propagation delay analysis tool to help RF engineers locating cells with high overshooting problems
 img: posts_imgs/3G_TP_plot_ge.jpg
 tags: [python, Google Earth, Huawei, RF, 3G]
 ---
 
-Recently i have found an excel macro tool to generate propagation delay plots for each 3G cell. It was very interesting and also helpful for us, RF engineers who are constantly optimizing RF coverage. Unfortunetely the macro was protected by password so it was not possile to apply the same concep to create a 4G tool. Also the fact that it was made with excel was kind of dissapointing (i am not very fan of excel macros) so i decided to first replicate the same principle with Python and then apply it to create the LTE tool. 
+Recently i have found an excel macro tool to generate propagation delay plots for each 3G cell. It was very interesting and also helpful for us, RF engineers who are constantly optimizing RF coverage. Unfortunetely the macro was protected by password so it was not possile to apply the same concep to create a 4G tool. Also the fact that it was made with excel was kind of dissapointing (i am not very fan of excel macros) so i decided to first replicate the same principle with Python and then apply it to create the LTE tool.
 
 ## Basic operations to get the KMZ
 
 Basically, there are 2 main operations to prepare the KMZ file.
 
-* We need to use geometryic calculations to get each point (coordinates in degrees) to be graphed in Google earth. For this we use: location (coordinates) of the cell, the distance for each point (depends on the propagation delay counters used) and the Horizontal Beamwidth of the antenna (usually 60 degrees)
+-   We need to use geometryic calculations to get each point (coordinates in degrees) to be graphed in Google earth. For this we use: location (coordinates) of the cell, the distance for each point (depends on the propagation delay counters used) and the Horizontal Beamwidth of the antenna (usually 60 degrees)
 
-* A function to generate an XML file with some modifications (like saved as KMZ) to be opened in Google Earth
+-   A function to generate an XML file with some modifications (like saved as KMZ) to be opened in Google Earth
 
 Next code block shows the 2 calculations required to get a latitude and longitude with only initial coordinate (cell location), distance from that initial coordinate to the new point, earth radius in Km (6378.1) and the angle (in radians) measure form the north (clockwise)between the initial point and the new point
 
@@ -26,9 +26,9 @@ Next code block shows the 2 calculations required to get a latitude and longitud
 }
 ```
 
-To generate the XML file we use a very popular library called: 
+To generate the XML file we use a very popular library called:
 
-- xml.etree.ElementTree
+-   xml.etree.ElementTree
 
 We also use 'minidom' for making it pretty (indentation) before saving the file (as .kmz)
 

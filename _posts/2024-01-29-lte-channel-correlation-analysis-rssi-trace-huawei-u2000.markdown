@@ -1,7 +1,7 @@
 ---
 layout: post
 title: LTE channel correlation analysis python tool based on RSSI trace from Huawei U2000 equipment
-date: 2019-11-07 23:00:00 -0500
+date: 2024-01-29 10:00:00 -0500
 description: Sharing development of basic python tool for LTE channel correlation analysis # Add post description (optional)
 img: posts_imgs/Cell-Signal-Strength-Chart.jpg # Add image post (optional)
 tags: [python, LTE, RSSI, correlation, RF, RNO] # add tag
@@ -13,8 +13,8 @@ In order to accomplish the best performance, the correlation of the Tx antennas 
 
 ## Lets see an example
 
-In the below picture we have a typical antenna bottom diagram, totally there are 5 antennas inside, each antenna has 2-ports with different polarization (+45/-45). For this example, lets use the 2 antennas Y1 and Y2 (Yellow diagram) because it is basically 2 antennas with the same characteristics (band, azimuth). 
-Lets supposed that you have a 2T2R LTE system, so logic said you should use only one of the 2 antennas, which is correct. However lets say you have a 2T4R system. In this case, you need to use both antennas, and here is where everything gets trickier. Since you have 2Tx, the jumpers for __those Tx channels must go with different polarization__ and for best performance (lower correlation) it is highly recommended to connect each jumper in a different antenna, so for this case you should connect 1Tx in the port 7 (+45) and the 2nd Tx in port 10 (-45)
+In the below picture we have a typical antenna bottom diagram, totally there are 5 antennas inside, each antenna has 2-ports with different polarization (+45/-45). For this example, lets use the 2 antennas Y1 and Y2 (Yellow diagram) because it is basically 2 antennas with the same characteristics (band, azimuth).
+Lets supposed that you have a 2T2R LTE system, so logic said you should use only one of the 2 antennas, which is correct. However lets say you have a 2T4R system. In this case, you need to use both antennas, and here is where everything gets trickier. Since you have 2Tx, the jumpers for **those Tx channels must go with different polarization** and for best performance (lower correlation) it is highly recommended to connect each jumper in a different antenna, so for this case you should connect 1Tx in the port 7 (+45) and the 2nd Tx in port 10 (-45)
 
 ![antenna_ports](/assets/img/posts_imgs/antenna-ports.png)
 

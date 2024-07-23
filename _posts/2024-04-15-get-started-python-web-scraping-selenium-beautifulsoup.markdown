@@ -1,17 +1,17 @@
 ---
 layout: post
 title: Get started with web scraping in python using selenium and beautifulsoup
-date: 2022-06-02 21:00:00 -0500
+date: 2024-04-15 10:00:00 -0500
 description: Learn how to perform some basic web scraping with python using libraries selenium and beautifulsoup
 img: posts_imgs/get-started-pyhton-webscrapping/what-is-webscraping.png
 tags: [python, webscraping, selenium, beautifulsoup]
 ---
 
-For this post, we will not focused on any specific web site to perform scraping, what we will do is to analyzed the main instructions required to start doing web scraping in any site. 
+For this post, we will not focused on any specific web site to perform scraping, what we will do is to analyzed the main instructions required to start doing web scraping in any site.
 First of all, let me share some important links that you can check to master your skills in web scraping.
 
-- Documentation for [BeautifulSoup](https://beautiful-soup-4.readthedocs.io/en/latest/)
-- Documentation for [Selenium](https://selenium-python.readthedocs.io/)
+-   Documentation for [BeautifulSoup](https://beautiful-soup-4.readthedocs.io/en/latest/)
+-   Documentation for [Selenium](https://selenium-python.readthedocs.io/)
 
 ## Installation of required libraries
 
@@ -109,7 +109,7 @@ Now we can analyze the data stored in the BeautifulSoup object.
 
 Let's check some of the most popular functions to access data in a HTML file (loaded as a BeautifulSoup Object).
 
-Next code, allowsto access all div tags with classes "class_1 class_2 class_3". Important to notice, the class must follow this order, otherwise data will not be found by the function. 
+Next code, allowsto access all div tags with classes "class_1 class_2 class_3". Important to notice, the class must follow this order, otherwise data will not be found by the function.
 
 ```python
     div_data = html_indexed_data.find_all("div", class_="class_1 class_2 class_3")
@@ -124,15 +124,15 @@ Since we used the funciont find_all, we should loop through the div_data variabl
         anchorsHrefs.append(anchor)
 ```
 
-If some data is inside ```<script></script>``` tags, we could load all the information as a dict object from JSON. This way would be much easier to get specific information. 
+If some data is inside `<script></script>` tags, we could load all the information as a dict object from JSON. This way would be much easier to get specific information.
 
-In the next case let's assume we require some data inside ```<script id="script_data"></script>``` so we need to use the function find and specify the id value of tag. At the end we set 'string' in order to get the internal data of the tags as string.
+In the next case let's assume we require some data inside `<script id="script_data"></script>` so we need to use the function find and specify the id value of tag. At the end we set 'string' in order to get the internal data of the tags as string.
 
 ```python
     script_json_tag_data = html_indexed_data.find(id="script_data").string
 ```
 
-In our case, the data inside the ```<script></script>``` tags is json format, so we can load it directly to python as a dict object.
+In our case, the data inside the `<script></script>` tags is json format, so we can load it directly to python as a dict object.
 
 ```python
     import json

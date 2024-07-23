@@ -1,9 +1,9 @@
 ---
 layout: post
 title: Working with Flask, MongoDB and Chart.JS for nice data visualization with python
-date: 2020-02-20 12:00:00 -0500
+date: 2024-02-10 12:00:00 -0500
 description: Sharing some tips to visualize data in python
-img: posts_imgs/flask_mongo.jpg 
+img: posts_imgs/flask_mongo.jpg
 tags: [python, mongodb, data visualization, flask, chart]
 ---
 
@@ -30,7 +30,7 @@ Voilà, now you already have a web server running on your 127.0.0.1:5000
 
 ## MongoDB Connection
 
-In my case, my data is saved in a MongoDB database in an AWS EC2 linux instance manually created. So to connect to the database we need to authenticate in the Ec2 instance before. Usually these connections are secured with SSH protocol. So in python we need to install the library *sshtunnel* and use the package *SSHTunnelForwarder*.
+In my case, my data is saved in a MongoDB database in an AWS EC2 linux instance manually created. So to connect to the database we need to authenticate in the Ec2 instance before. Usually these connections are secured with SSH protocol. So in python we need to install the library _sshtunnel_ and use the package _SSHTunnelForwarder_.
 
 To create the connection we need to fill following data:
 
@@ -51,7 +51,7 @@ MONGO_SSH_USER is the user of the EC2 instance, depending on the type of AMI use
 MONGO_SSH_PRIVATE_KEY is the path where your PEM key is located in case you use this method to connect to the instance.
 MONGO_LOCALHOST is the address where the MongoDB is installed, if you follow normal procedure this would be the localhost address (127.0.0.1)
 
-The previous code returns *connectionSSH* which shoould be started like this (assuming it is saved in a variable called server):
+The previous code returns _connectionSSH_ which shoould be started like this (assuming it is saved in a variable called server):
 
 ```python
     server.start()
@@ -73,7 +73,7 @@ At this point you can perform any query on the Mongo database with the variable 
 
 ## MongoDB Query
 
-To perform queries on MongoDB with python we use the library *PyMongo* which is probably the most popular and used library for MongoDB.
+To perform queries on MongoDB with python we use the library _PyMongo_ which is probably the most popular and used library for MongoDB.
 
 To start performing query we need to define the DB where the query will be executed. In the following example we select 'company' as the DB
 
@@ -81,15 +81,15 @@ To start performing query we need to define the DB where the query will be execu
     db = client['company']
 ```
 
-On the *db* variable we can perform the MongoDB queries, let's do with some examples:
+On the _db_ variable we can perform the MongoDB queries, let's do with some examples:
 
 ```python
     usersData = db.users.find({"type": 0}, {'_id': 1, 'email': 1, 'created_at': 1})
 ```
 
-Previous query is executed in the collection *users*, the first '{}' is used to add some filters, in this case we are querying all the users where the field *type* is 0. The second '{}' is to define what fields to get from the query, sometimes the collection has too many fields and we only need few, so we use this second array to define which fields to obtain. 
+Previous query is executed in the collection _users_, the first '{}' is used to add some filters, in this case we are querying all the users where the field _type_ is 0. The second '{}' is to define what fields to get from the query, sometimes the collection has too many fields and we only need few, so we use this second array to define which fields to obtain.
 
-The result are saved as *cursor* object in usersData, that means that you need to iterate over the cursor with a loop similar to this:
+The result are saved as _cursor_ object in usersData, that means that you need to iterate over the cursor with a loop similar to this:
 
 ```python
     total_users = 0
@@ -97,11 +97,11 @@ The result are saved as *cursor* object in usersData, that means that you need t
     recentWeek_users = 0
     for item in usersData:
         total_users = total_users + 1
-        if item['created_at'] > (datetime.now() - timedelta(hours=24)):      
+        if item['created_at'] > (datetime.now() - timedelta(hours=24)):
             recent24h_users = recent24h_users + 1
-        if item['created_at'] > (datetime.now() - timedelta(hours=168)): 
+        if item['created_at'] > (datetime.now() - timedelta(hours=168)):
             recentWeek_users = recentWeek_users + 1
-    
+
     getKPIUsers = {
             'totalUsers': total_users,
             'recent24hUsers': recent24h_users,
@@ -113,23 +113,26 @@ So in previous code snipet we are counting the total of users registered in the 
 
 ## Passing MongoDB data to HTML templates and graph it
 
-Now that we have our data collected from MongoDB we need to pass it to our view to chart. For this case we use a method provided by flask called *render_template*
+Now that we have our data collected from MongoDB we need to pass it to our view to chart. For this case we use a method provided by flask called _render_template_
 
 ```python
     return render_template('dashboard.html', KPIUsers=getKPIUsers)
 ```
 
-Previous code loads the 'dashboard.html' file and send a the data in a variable called *KPIUsers.
+Previous code loads the 'dashboard.html' file and send a the data in a variable called \*KPIUsers.
 
 In the HTML file we have following code to generate the chart:
 
 ```html
-    <!-- Chart.js is loaded here -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
-    <div>
-        <canvas id="users" width="150" height="50"></canvas>
-        <script>
+<!-- Chart.js is loaded here -->
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css"
+/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+<div>
+    <canvas id="users" width="150" height="50"></canvas>
+    <script>
         var ctxUsers = document.getElementById('users').getContext('2d');
         var users = new Chart(ctxUsers, {
             type: 'bar',
@@ -144,9 +147,10 @@ In the HTML file we have following code to generate the chart:
                 }]
             }
         });
-        </script>
-    </div>
+    </script>
+</div>
 ```
+
 Notice that the arrangement of the labels and data must be equal to match each KPI with corresponding label. You have tons of options to customize your chart and the [documentation](https://www.chartjs.org/docs/latest/) is very easy to understand.
 
 Hope this post is useful for you, if you have any suggestion/comment/question drop a comment below.

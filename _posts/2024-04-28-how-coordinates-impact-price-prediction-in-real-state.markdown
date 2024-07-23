@@ -1,26 +1,36 @@
 ---
 layout: post
 title: How coordinates (latitude and longitude) impact price prediction in real state
-date: 2022-08-15 18:00:00 -0500
+date: 2024-04-28 10:00:00 -0500
 description: Review some ML results algorithms comparing the RMSE for house price prediction when using geographical coordinates
 img: posts_imgs/how-coordinates-impact-house-price-prediction/real-state-location-ml.jpeg
-tags: [python, scikit-learn, machine learning, regression, data science, data analysis, data exploration, real state, price prediction]
+tags:
+    [
+        python,
+        scikit-learn,
+        machine learning,
+        regression,
+        data science,
+        data analysis,
+        data exploration,
+        real state,
+        price prediction,
+    ]
 ---
 
 Analyzing results for different regression algorithms during house price prediction, we found huge improvement by incluidng latitude and longitude values as feaures for the model. Let's review and compare some of the results obtained.
 
-- Data belongs to Colombian real state market
-- Some of the main features used are:
-    - Number of rooms
-    - Number of garages
-    - Number of bathrooms
-    - Stratum (Value from 1 to 6 which provides socio-deographics information of the area)
-    - Type of property
-    - Age of the property
-    - Size of the property
-    - Geographic location of the property
-    - Price of property (which is the target feature)
-
+-   Data belongs to Colombian real state market
+-   Some of the main features used are:
+    -   Number of rooms
+    -   Number of garages
+    -   Number of bathrooms
+    -   Stratum (Value from 1 to 6 which provides socio-deographics information of the area)
+    -   Type of property
+    -   Age of the property
+    -   Size of the property
+    -   Geographic location of the property
+    -   Price of property (which is the target feature)
 
 ## Data Exploratory
 
@@ -48,10 +58,10 @@ Another important feature is area of the property. This plot shows a lot of outl
 
 Based on previous basic analysis, we have defined following filters in order to get a model more accurate.
 
-- Stratum equals to 4. Other stratum requires to consider more features to get more accuracy on the model. After the filter is applied, this column is useless so it will be dropped.
-- Price below 600M. For Stratum 4, 600M is a good thresholds to discard outliers.
-- Total area in square meters is maximum 180. Same as price, for stratum 4, 180 square meters is a good threshold to discard outliers.
-- For the price we applied a range reduction in order to change from millions to thousands by dividing all rows by 1M.
+-   Stratum equals to 4. Other stratum requires to consider more features to get more accuracy on the model. After the filter is applied, this column is useless so it will be dropped.
+-   Price below 600M. For Stratum 4, 600M is a good thresholds to discard outliers.
+-   Total area in square meters is maximum 180. Same as price, for stratum 4, 180 square meters is a good threshold to discard outliers.
+-   For the price we applied a range reduction in order to change from millions to thousands by dividing all rows by 1M.
 
 Since we are using pandas to load the data in tabular form, we use dataframe functions to filter the data.
 
@@ -125,7 +135,7 @@ As we can see, the coordinates can be a very important feature (as it was suppos
 
 In additional testing, we have found some additional insights that we can consider in order to improve the accuracy of house pricing models.
 
-- Continue to add more data. I have been feeding my dataset with additional data and always getting small improvements in the results.
-- Consider more features such as: Security in the area, quality of schools nearby, parks/malls/stores nearby, accessibility, noise levels etc.
-- Historical data regarding sales of each property
-- Real state market indicators
+-   Continue to add more data. I have been feeding my dataset with additional data and always getting small improvements in the results.
+-   Consider more features such as: Security in the area, quality of schools nearby, parks/malls/stores nearby, accessibility, noise levels etc.
+-   Historical data regarding sales of each property
+-   Real state market indicators
