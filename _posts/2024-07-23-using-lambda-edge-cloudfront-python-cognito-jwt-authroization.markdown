@@ -41,24 +41,22 @@ The "lambda_handler" is the main function triggered when the lambda is invoked. 
 1. User is trying to log in. For this case the query string in the URL contains a parameter "code" which is the code returned from Cognito when the log in succeed.
 
 ```python
-    referer = headers['referer'][0]['value']
-    code = request['querystring'].split('code=')[1]
-    tokens = get_tokens(code)
-    access_token_verification = verify_token_signature(tokens['access_token'])
-    id_token_verification = verify_token_signature(tokens['id_token'])
-    refresh_token_verification = verify_token_signature(tokens['refresh_token'])
+  referer = headers['referer'][0]['value']
+  code = request['querystring'].split('code=')[1]
+  tokens = get_tokens(code)
+  tokens['verifitcation'] = verify_tokens(tokens)
 ```
 
 Using the "code" parameter, we can now exchange it for tokens (JWT), for this we use the following function:
 
 ```python
-    def get_tokens(code):
-        headers = {
-            'Content-Type' : 'application/x-www-form-urlencoded'
-        }
-        url = f"{AUTH_URL}oauth2/token?grant_type=authorization_code&code={code}&client_id={COGNITO_CLIENT_ID}&redirect_uri={BASE_URL}"
-        response = http.request('POST', url, headers=headers)
-        return json.loads(response.data.decode('utf-8'))
+  def get_tokens(code):
+    headers = { 
+        'Content-Type' : 'application/x-www-form-urlencoded'
+    }
+    url = f"{AUTH_URL}oauth2/token?grant_type=authorization_code&code={code}&client_id={COGNITO_CLIENT_ID}&redirect_uri={BASE_URL}"
+    response = http.request('POST', url, headers=headers)
+    return json.loads(response.data.decode('utf-8'))
 ```
 
 Then the code just checks whether the tokens are valid and if they are them we proceed to store the tokens as cookies.
@@ -66,37 +64,29 @@ Then the code just checks whether the tokens are valid and if they are them we p
 2. The request includes cookies with tokens, so in this code block we validate the cookies before granting access.
 
 ```python
-    cookie.load(headers['cookie'][0]['value'])
-    cookies = {}
-    for key, val in cookie.items():
-        cookies[key] = val.value
-    print(f"Cookies: {cookies}")
-    access_token_verification = verify_token_signature(cookies['access'])
-    id_token_verification = verify_token_signature(cookies['id'])
-    refresh_token_verification = verify_token_signature(cookies['refresh'])
+  cookie.load(headers['cookie'][0]['value'])
+  cookies = {}
+  for key, val in cookie.items():
+      cookies[key] = val.value
+  print(f"Cookies: {cookies}")
+  cookies['verifitcation'] = verify_tokens(cookies)
 ```
 
-The function "verify_token_signature" takes a token (access, id or refresh) and verifies its authenticity.
+The function "verify_tokens" takes the id and access tokens and verifies the authenticity.
 
 ```python
-    def verify_token_signature(token):
-        for idx, k in enumerate(token_signing_keys):
-            pub_key = jwk.construct(k)
-            message, encoded_sig = token.rsplit('.', 1)
-            decoded_sig = base64url_decode(encoded_sig.encode())
-            try:
-                pub_key.verify(message, decoded_sig)
-                return {
-                    'status': 200,
-                    'pub_key': pub_key
-                }
-            except:
-                if len(token_signing_keys) == idx+1:
-                    return {
-                        'status': 401
-                    }
-                else:
-                    pass
+  def verify_tokens(tokens):
+    try:
+      decoded_token = jwt.decode(tokens['id_token'], token_signing_keys, algorithms=["RS256"], audience=COGNITO_CLIENT_ID, access_token=tokens['access_token'])
+      return {
+          'status': 200
+      }
+    except JWTError as e:
+      print("Token is invalid:", str(e))
+      return {
+          'status': 401,
+          'error': str(e)
+      }
 ```
 
 If the tokens are valid, then the request is returned without modification, otherwise the cookies are cleared and the user is redirected to the login page (Cognito login URL).
@@ -104,17 +94,17 @@ If the tokens are valid, then the request is returned without modification, othe
 3. At last, if there is no code in the URL query string and no cookies with tokens, then the user is redirected to the login page.
 
 ```python
-    response = {
-            'status': '302',
-            'statusDescription': 'Redirect',
-            'headers': {
-                'location': [{
-                    'key': 'Location',
-                    'value': AUTH_URL+'login?client_id='+COGNITO_CLIENT_ID+'&response_type=code&scope=email+openid&redirect_uri='+BASE_URL
-                }]
-            }
-        }
-    return json.loads(json.dumps(response, default=str))
+  response = {
+      'status': '302',
+      'statusDescription': 'Redirect',
+      'headers': {
+          'location': [{
+              'key': 'Location',
+              'value': AUTH_URL+'login?client_id='+COGNITO_CLIENT_ID+'&response_type=code&scope=email+openid&redirect_uri='+BASE_URL
+          }]
+      }
+  }
+  return json.loads(json.dumps(response, default=str))  
 ```
 
 And that's it. Now you can implement your authorization pipeline using Python, Lambda@Edge, CloudFront and S3.
