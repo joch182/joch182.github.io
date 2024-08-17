@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Set cookies in Lambda function triggered by API Gateway for a different subdomain
-date: 2024-07-11 10:00:00 -0500
+date: 2024-08-19 10:00:00 -0500
 description: Learn how to set cookies from a lambda function that was triggered by API Gateway using a subdomain.
 img: posts_imgs/apigw-lambda-set-cookies/apigw_lambda.jpeg
 tags: [python, AWS, API gateway, lambda, jwt, sign out]
