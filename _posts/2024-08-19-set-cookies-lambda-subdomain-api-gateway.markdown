@@ -72,4 +72,4 @@ def lambda_handler(event, context):
 
 The previous code is removing the existing cookies and the browser function logout() can redirect the user to the login page, since the cookies are removed then the user needs to authenticate again to access.
 
-And that's it. Now you can managed cookies from a Lambda function triggered by API gateway when using different subdomains.
+And that's it. Now you can managed the cookies of your website from a Lambda function triggered by API gateway when using multiple subdomains.
