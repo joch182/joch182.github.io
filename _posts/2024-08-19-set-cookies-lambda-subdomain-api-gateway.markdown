@@ -46,11 +46,11 @@ The function get_token() help us to recover the JWT token used to add it as Auth
 
 In the stage of "Integration Request" we use a Lambda integration with "Lambda proxy integration" enabled, this way the API Gateway directly passes the incoming request from the client as an event object to the Lambda function.
 
-Finally we need to configure the CORS configuration for the preflight stage (OPTIONS method)
+Finally we need to configure the CORS configuration for the preflight stage (OPTIONS method). The "Access-Control-Allow-Origin" should be the subdomain used by the main page (not the subdomain of the API gateway custom domain)
 
 ![API Gateway CORS Config.](/assets/img/posts_imgs/apigw-lambda-set-cookies/apigw_cors.png)
 
-The lambda function triggered by API gateway is ow capable to set the value for the tokens in the cookies.
+The lambda function triggered by API gateway is now capable to set the value for the tokens in the cookies. The cookies are available for the full domain as they are set with "Domain=domain.com". You can also set only for the subdomain, but in our case we prefer to keep them available for any subdomain inside domain.com
 
 ```python
 import json
