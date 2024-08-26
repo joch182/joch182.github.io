@@ -4,7 +4,7 @@ title: Set cookies in Lambda function triggered by API Gateway for a different s
 date: 2024-08-19 10:00:00 -0500
 description: Learn how to set cookies from a lambda function that was triggered by API Gateway using a subdomain.
 img: posts_imgs/apigw-lambda-set-cookies/apigw_lambda.jpeg
-tags: [python, AWS, API gateway, lambda, jwt, sign out]
+tags: [python, AWS, API gateway, lambda, jwt, cookies]
 ---
 
 In this quick post we will review how to set cookies to a specific value from a different subdomain using Lambda service triggered by API gateway. For this post, we will develop a sign out process where the API Gateway has a GET route https://subdomain.domain.com/logout which can be triggered to delete the cookies (which contain JWT for authroization) and redirect to sign in page.
