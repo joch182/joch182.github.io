@@ -7,7 +7,7 @@ img: posts_imgs/apigw-lambda-set-cookies/apigw_lambda.jpeg
 tags: [python, AWS, API gateway, lambda, jwt, cookies]
 ---
 
-In this quick post we will review how to set cookies to a specific value from a different subdomain using Lambda service triggered by API gateway. For this post, we will develop a sign out process where the API Gateway has a GET route https://subdomain.domain.com/logout which can be triggered to delete the cookies (which contain JWT for authroization) and redirect to sign in page.
+In this quick post we will review how to set cookies to a specific value from a different subdomain using Lambda service triggered by API gateway. For this post, we will develop a sign out process where the API Gateway has a GET route https://subdomain.domain.com/logout which can be triggered to delete the cookies (which contain JWT for authorization) and redirect to sign in page.
 
 The website is located in https://subdomain1.domain.com and the API gateway used the custom domain https://subdomain2.domain.com. It is important that the domain is the same for both cases.
 
@@ -40,7 +40,7 @@ function logout() {
 }
 ```
 
-The function get_token() help us to recover the JWT token used to add it as Authroization header. This is required to pass the "Method Request" stage from the API gateway GET /logout route which uses a Cognito authorizer to verify the token and confirm the user is authorized to perform the action.
+The function get_token() help us to recover the JWT token used to add it as Authroization header (if you set httpOnly to true when creating the cookie, Javascript will not access the cookie for security reasons). This is required to pass the "Method Request" stage from the API gateway GET /logout route which uses a Cognito authorizer to verify the token and confirm the user is authorized to perform the action.
 
 ![Method request configuration](/assets/img/posts_imgs/apigw-lambda-set-cookies/method_request.png)
 
@@ -70,6 +70,6 @@ def lambda_handler(event, context):
     return json.loads(json.dumps(response, default=str)) 
 ```
 
-The previous code is removing the existing cookies and the browser function logout() can redirect the user to the login page, since the cookies are removed then the user needs to authenticate again to access.
+The previous code is removing the existing cookies and the browser function logout() is redirecting the user to the login page, since the cookies are removed then the user needs to authenticate again to access.
 
 And that's it. Now you can managed the cookies of your website from a Lambda function triggered by API gateway when using multiple subdomains.
