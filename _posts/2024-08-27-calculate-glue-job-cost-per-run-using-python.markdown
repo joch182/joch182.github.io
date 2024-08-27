@@ -19,7 +19,7 @@ glue_client = boto3.client('glue')
 s3_client = boto3.client('s3')  
 ```
 
-Then using the Glue client, we need to collect the jobs using the !["list_jobs"](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/glue/client/list_jobs.html) Glue API. All the jobs will be saved in a python list. This API returns a certain limit of jobs so we need to query multiple times using the "NextToken" value return in each call which indicates that there are still jobs pending to collect. When "NextToken" is not return, it means that there are no Job pendings to retrieve.
+Then using the Glue client, we need to collect the jobs using the ["list_jobs"](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/glue/client/list_jobs.html) Glue API. All the jobs will be saved in a python list. This API returns a certain limit of jobs so we need to query multiple times using the "NextToken" value return in each call which indicates that there are still jobs pending to collect. When "NextToken" is not return, it means that there are no Job pendings to retrieve.
 
 ```python
 # Collect Job names
@@ -35,7 +35,7 @@ while True:
   break
 ```
 
-Now that we have a python list with all the job names, we need to retrieve all the job runs for each job name. In this case we will collect all the job runs for the last 90 days using the Glue API !["get_job_runs"](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/glue/client/get_job_runs.html). Same as before, this API, does not return all the information at once, so we need to call it multiple times as long the response includes "NextToken" which means there is still pending job runs to retrieve.
+Now that we have a python list with all the job names, we need to retrieve all the job runs for each job name. In this case we will collect all the job runs for the last 90 days using the Glue API ["get_job_runs"](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/glue/client/get_job_runs.html). Same as before, this API, does not return all the information at once, so we need to call it multiple times as long the response includes "NextToken" which means there is still pending job runs to retrieve.
 
 ```python
 # Collect job runs for each job name
@@ -59,7 +59,7 @@ for job in jobs:
       break
 ```
 
-Finally, once the data is already collected, we create a python Dataframe using Pandas and save the result as CSV file into S3 using the Boto3 API !["upload_file"](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3/client/upload_file.html). We need to have a Bucket created and set the Prefix (or route) to save the file in S3.
+Finally, once the data is already collected, we create a python Dataframe using Pandas and save the result as CSV file into S3 using the Boto3 API ["upload_file"](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3/client/upload_file.html). We need to have a Bucket created and set the Prefix (or route) to save the file in S3.
 
 ```python
 # Save data as DF
@@ -69,4 +69,4 @@ df.to_csv("/tmp/output.csv", index=False)
 s3_client.upload_file('/tmp/output.csv', 'BUCKET_NAME', 'PREFIX/output.csv')
 ```
 
-Once we have this information in a spreadsheet, we can use the ![pricing](https://aws.amazon.com/glue/pricing/) guidelines from Glue to calculate the cost of each job run based on the DPU, time consumption, job type, executtion class etc.
+Once we have this information in a spreadsheet, we can use the [pricing](https://aws.amazon.com/glue/pricing/) guidelines from Glue to calculate the cost of each job run based on the DPU, time consumption, job type, executtion class etc.
